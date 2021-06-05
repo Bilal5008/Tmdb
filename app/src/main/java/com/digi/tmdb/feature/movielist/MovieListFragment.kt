@@ -28,6 +28,8 @@ class MovieListFragment : BaseFragment() {
         handler =  Handler()
         handler.postDelayed({
             run {
+                val amount  : Float = 1.2f
+
                 var navController: NavController = Navigation.findNavController(view)
                 navController.navigate(R.id.action_movieListFragment_to_movieDetailFragment)
             }
