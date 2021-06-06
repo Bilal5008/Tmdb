@@ -1,12 +1,18 @@
-package com.digi.tmdb.base
+package com.brainx.spotify.base
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.digi.tmdb.R
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 
-open class BaseActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
+abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmActivity<VM>() {
+
+    lateinit var mDatabind: DB
+
+    override fun initDataBind() {
+        mDatabind = DataBindingUtil.setContentView(this, layoutId())
+        mDatabind.lifecycleOwner = this
     }
+
+    abstract override fun layoutId(): Int
+    abstract override fun initView(savedInstanceState: Bundle?)
 }
