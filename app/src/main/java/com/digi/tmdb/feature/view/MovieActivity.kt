@@ -1,4 +1,4 @@
-package com.digi.tmdb.feature.movielist
+package com.digi.tmdb.feature.view
 
 import android.os.Bundle
 import android.util.Log
@@ -9,16 +9,16 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
 import com.digi.tmdb.databinding.MovieListActivityBinding
-import com.digi.tmdb.feature.adapter.MovieListAdapter
+import com.digi.tmdb.feature.movielist.ApiHelper
+import com.digi.tmdb.feature.movielist.adapter.MovieListAdapter
 import com.digi.tmdb.feature.movielist.factory.ViewModelFactory
-import com.digi.tmdb.feature.movielist.repo.MovieRepository
 import com.digi.tmdb.feature.movielist.viewmodel.MovieViewModel
 import com.digi.tmdb.retrofit.Filter
+import com.digi.tmdb.retrofit.RetroInstance
 
 class MovieListActivity : AppCompatActivity() {
 
@@ -26,7 +26,6 @@ class MovieListActivity : AppCompatActivity() {
 
     private lateinit var movieViewModel: MovieViewModel
     private lateinit var movieListAdapter: MovieListAdapter
-    private lateinit var viewModelFactory: ViewModelFactory
     private var query: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,9 +36,10 @@ class MovieListActivity : AppCompatActivity() {
 
 
 
-        movieViewModel = ViewModelProvider(this, viewModelFactory).get(
-            MovieViewModel::class.java
-        )
+        movieViewModel =
+            ViewModelProvider(this, ViewModelFactory(ApiHelper(RetroInstance.apiService))).get(
+                MovieViewModel::class.java
+            )
         setAdapter()
         setSearchBar()
 //        createObserver()
