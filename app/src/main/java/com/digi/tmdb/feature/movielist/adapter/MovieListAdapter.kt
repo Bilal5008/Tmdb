@@ -1,17 +1,14 @@
-package com.brainx.spotify.views.adapter
+package com.digi.tmdb.feature.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.brainx.spotify.R
-import com.brainx.spotify.data.models.Artist
-import com.brainx.spotify.data.models.listResponse.BaseListResponse
-import com.brainx.spotify.databinding.ArtistRecyclerviewItemBinding
 import com.digi.tmdb.R
+import com.digi.tmdb.databinding.ArtistRecyclerviewItemBinding
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 
-class ArtistListAdapter : RecyclerView.Adapter<ArtistListAdapter.ArtistViewHolder>() {
+class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ArtistViewHolder>() {
 
     var artistListData = ArrayList<BaseListResponse?>()
     var filterArtistListData = ArrayList<BaseListResponse?>()
@@ -48,7 +45,7 @@ class ArtistListAdapter : RecyclerView.Adapter<ArtistListAdapter.ArtistViewHolde
         fun bindHolder(artistObject: BaseListResponse?) {
             binding.apply {
                 movie = artistObject
-                adapter = this@ArtistListAdapter
+                adapter = this@MovieListAdapter
                 executePendingBindings()
             }
         }
