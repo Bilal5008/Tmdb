@@ -5,7 +5,9 @@ import com.digi.tmdb.feature.movielist.ApiHelper
 import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
 import com.digi.tmdb.retrofit.AppConstants
 import io.reactivex.Observable
+import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DefaultObserver
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
@@ -19,7 +21,7 @@ class MovieRepository(var apiHelper: ApiHelper) {
             apiHelper.run {
                 getMovies(query, AppConstants.API_TOKEN).subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : DefaultObserver<AllListResponse>() {
+                    .subscribe(object : Observer<AllListResponse> {
                         override fun onNext(t: AllListResponse) {
                             emitter.onNext(t)
                         }
@@ -59,8 +61,12 @@ class MovieRepository(var apiHelper: ApiHelper) {
                         override fun onComplete() {
                             Log.d(
                                 TAG,
-                                "onError: BAD GATEWAY"
+                                "onComplete"
                             )
+                        }
+
+                        override fun onSubscribe(d: Disposable) {
+
                         }
 
 
