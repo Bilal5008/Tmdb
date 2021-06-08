@@ -1,4 +1,4 @@
-package com.brainx.spotify.base
+package com.digi.tmdb.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

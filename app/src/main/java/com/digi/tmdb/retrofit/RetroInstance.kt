@@ -1,4 +1,4 @@
-package com.brainx.spotify.retrofit
+package com.digi.tmdb.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,5 +26,7 @@ class RetroInstance {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
         }
+
+        val apiService: RetroService = getRetroInstance().create(RetroService::class.java)
     }
 }

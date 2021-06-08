@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.digi.tmdb.base.BaseActivity
 
 
-class SplashActivity : BaseActivity() {
+class SplashActivity : AppCompatActivity() {
     var stop = false
     lateinit var handler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {

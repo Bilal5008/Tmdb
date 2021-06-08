@@ -1,4 +1,4 @@
-package com.brainx.spotify.base
+package com.digi.tmdb.base
 
 import androidx.lifecycle.ViewModel
 

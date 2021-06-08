@@ -5,11 +5,11 @@
 
         <variable
             name="movie"
-            type="com.brainx.spotify.data.models.listResponse.BaseListResponse" />
+            type="com.digi.tmdb.feature.movielist.listResponse.BaseListResponse" />
 
         <variable
             name="adapter"
-            type="com.brainx.spotify.views.adapter.ArtistListAdapter" />
+            type="com.digi.tmdb.feature.movielist.adapter.MovieListAdapter" />
 
     </data>
 

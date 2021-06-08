@@ -18,6 +18,11 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.digi.tmdb.feature.MovieDetailFragment"
         android:label="fragment_movie_detail"
-        tools:layout="@layout/fragment_movie_detail" />
+        tools:layout="@layout/fragment_movie_detail" >
+<!--        <argument-->
+
+<!--            android:name="movie"-->
+<!--            app:argType="com.digi.tmdb.feature.movielist.model.Movie" />-->
+    </fragment>
 
 </navigation>

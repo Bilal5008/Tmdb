@@ -9,23 +9,26 @@ import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
 import com.digi.tmdb.retrofit.AppConstants
 
-class ConnectionLiveData(private val context: Context) : LiveData<ConnectionModel?>() {
+class ConnectionLiveData(private val context: Context?) : LiveData<ConnectionModel?>() {
     override fun onActive() {
         super.onActive()
         val filter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        context.registerReceiver(networkReceiver, filter)
+        context?.registerReceiver(networkReceiver, filter)
     }
 
     override fun onInactive() {
         super.onInactive()
-        context.unregisterReceiver(networkReceiver)
+        context?.unregisterReceiver(networkReceiver)
     }
 
     private val networkReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        var connectivityManager =
+            context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
         override fun onReceive(context: Context, intent: Intent) {
             if (intent.extras != null) {
                 val activeNetwork =
-                    intent.extras!![ConnectivityManager.EXTRA_NETWORK_INFO] as NetworkInfo?
+                    connectivityManager.activeNetworkInfo
                 val isConnected = activeNetwork != null &&
                         activeNetwork.isConnectedOrConnecting
                 if (isConnected) {

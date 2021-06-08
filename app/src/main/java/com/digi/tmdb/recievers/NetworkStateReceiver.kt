@@ -1,4 +1,4 @@
-package com.brainx.spotify.recievers
+package com.digi.tmdb.recievers
 
 import android.content.BroadcastReceiver
 import android.content.Context

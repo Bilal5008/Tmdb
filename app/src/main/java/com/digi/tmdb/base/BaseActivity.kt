@@ -1,4 +1,4 @@
-package com.brainx.spotify.base
+package com.digi.tmdb.base
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -14,5 +14,5 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmAc
     }
 
     abstract override fun layoutId(): Int
-    abstract override fun initView(savedInstanceState: Bundle?)
+   abstract override fun initView(savedInstanceState: Bundle?)
 }

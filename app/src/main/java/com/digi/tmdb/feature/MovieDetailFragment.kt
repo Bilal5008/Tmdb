@@ -7,15 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.digi.tmdb.R
 
 
 class MovieDetailFragment : Fragment() {
+    lateinit var navController: NavController
 
     lateinit var handler: Handler
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -25,11 +26,15 @@ class MovieDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_movie_detail, container, false)
-        return view
-
+        return inflater.inflate(R.layout.fragment_movie_detail, container, false)
 
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        val message = arguments?.getParcelable<Movie>("movie")?.title
+//        view.findViewById<TextView>(R.id.value).text = message.toString()
+
+    }
 }

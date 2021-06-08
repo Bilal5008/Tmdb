@@ -1,4 +1,4 @@
-package com.digi.tmdb.feature.adapter
+package com.digi.tmdb.feature.movielist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.digi.tmdb.R
 import com.digi.tmdb.databinding.ArtistRecyclerviewItemBinding
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
+
 
 class MovieListAdapter : RecyclerView.Adapter<MovieListAdapter.ArtistViewHolder>() {
 
