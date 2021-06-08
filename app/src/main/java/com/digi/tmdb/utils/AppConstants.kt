@@ -1,4 +1,4 @@
-package com.digi.tmdb.retrofit
+package com.digi.tmdb.utils
 object AppConstants {
 
 

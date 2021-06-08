@@ -5,9 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
-import com.digi.tmdb.retrofit.AppConstants
+import com.digi.tmdb.utils.AppConstants
 
 class ConnectionLiveData(private val context: Context?) : LiveData<ConnectionModel?>() {
     override fun onActive() {

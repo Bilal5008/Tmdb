@@ -2,12 +2,7 @@ package com.digi.tmdb
 
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import com.bumptech.glide.Glide
-import com.digi.tmdb.base.BaseActivity
 
 
 class SplashActivity : AppCompatActivity() {

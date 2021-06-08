@@ -1,21 +1,22 @@
-package com.digi.tmdb.feature.movielist.viewmodel
+package com.digi.tmdb.feature.moviedetail.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
+import com.digi.tmdb.feature.moviedetail.movieresponse.MovieDetailResponse
 import com.digi.tmdb.feature.movielist.repo.MovieRepository
 
-class MovieListViewModel(private val movieRepository: MovieRepository) : ViewModel() {
+class MovieDetailViewModel(
+    private val movieRepository: MovieRepository
+) : ViewModel() {
 
 
+    private val baseListResponse: MutableLiveData<MovieDetailResponse> = MutableLiveData()
+    val movieLiveData: LiveData<MovieDetailResponse> = baseListResponse
 
-    private val baseListResponse: MutableLiveData<AllListResponse> = MutableLiveData()
-    val movieLiveData: LiveData<AllListResponse> = baseListResponse
-
-    fun prepareMovieRepo(name: String) {
+    fun prepareDetailMovieRepo(name: Int) {
         movieRepository
-            .getMovieListObserverRx(name)
+            .getMovieDetailObserverRx(name)
             .subscribe {
                 baseListResponse.postValue(it)
             }

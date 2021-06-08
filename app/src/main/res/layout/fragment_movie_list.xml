@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="movieListViewModel"
-            type="com.digi.tmdb.feature.movielist.viewmodel.MovieViewModel" />
+            type="com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel" />
 
         <import type="android.view.View" />
 
@@ -13,6 +14,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        tools:context=".feature.movielist.MovieListFragment"
         android:layout_height="match_parent">
 
 
@@ -64,8 +66,6 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_artist_items_title" />'
 
 
-
-
         <!--        <ProgressBar-->
         <!--            android:id="@+id/pb_loading"-->
         <!--            android:layout_width="wrap_content"-->
@@ -79,19 +79,19 @@
         <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-<!--        <com.github.ybq.android.spinkit.SpinKitView-->
+        <!--        <com.github.ybq.android.spinkit.SpinKitView-->
 
-<!--            android:id="@+id/spin_kit"-->
-<!--            style="@style/SpinKitView.Large.Circle"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:visibility="@{movieListViewModel.isLoading ? View.VISIBLE  : View.GONE}"-->
-<!--            app:SpinKit_Color="@color/colorAccent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <!--            android:id="@+id/spin_kit"-->
+        <!--            style="@style/SpinKitView.Large.Circle"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:visibility="@{movieListViewModel.isLoading ? View.VISIBLE  : View.GONE}"-->
+        <!--            app:SpinKit_Color="@color/colorAccent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

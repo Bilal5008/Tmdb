@@ -1,4 +1,4 @@
-package com.digi.tmdb.feature
+package com.digi.tmdb.feature.movielist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,21 +17,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
+import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieListBinding
-import com.digi.tmdb.feature.movielist.ApiHelper
 import com.digi.tmdb.feature.movielist.adapter.MovieListAdapter
-import com.digi.tmdb.feature.movielist.factory.ViewModelFactory
-import com.digi.tmdb.feature.movielist.viewmodel.MovieViewModel
-import com.digi.tmdb.retrofit.AppConstants
+import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
 import com.digi.tmdb.retrofit.Filter
 import com.digi.tmdb.retrofit.RetroInstance
+import com.digi.tmdb.utils.AppConstants
 import com.digi.tmdb.utils.internetconnectivity.ConnectionLiveData
 
 
 class MovieListFragment : Fragment(), LifecycleOwner {
 
     private lateinit var binding: FragmentMovieListBinding
-    private lateinit var movieViewModel: MovieViewModel
+    private lateinit var movieViewModel: MovieListViewModel
     private var query: String = ""
     private lateinit var movieListAdapter: MovieListAdapter
 
@@ -42,8 +41,8 @@ class MovieListFragment : Fragment(), LifecycleOwner {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
         movieViewModel =
-            ViewModelProvider(this, ViewModelFactory(ApiHelper(RetroInstance.apiService))).get(
-                MovieViewModel::class.java
+            ViewModelProvider(this, GlobalViewModelFactory(ApiHelper(RetroInstance.apiService))).get(
+                MovieListViewModel::class.java
             )
 
         return binding.root
