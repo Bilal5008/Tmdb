@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
 import com.digi.tmdb.feature.movielist.repo.MovieRepository
 
-class MovieViewModel(private val movieRepository: MovieRepository) : ViewModel() {
+class MovieListViewModel(private val movieRepository: MovieRepository) : ViewModel() {
 
 
 

@@ -15,7 +15,7 @@
 
         <activity
 
-            android:name=".feature.view.MovieActivity"
+            android:name="com.digi.tmdb.base.view.MovieActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
