@@ -1,11 +1,13 @@
 package com.digi.tmdb.feature.movielist
 
-import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
-import io.reactivex.Observable
+import com.digi.tmdb.feature.movielist.list_api_interface.IUpcomingMovies
+import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
 
-class NowPlayingMovies : ApiHelper {
-    
-    override fun getMovies(query: String, apiToken: String): Observable<AllListResponse> {
-        return super.getMovies(query, apiToken)
+class UpCommingMovies(private val movieViewModel: MovieListViewModel) : IUpcomingMovies {
+
+    override fun getUpComingMovies(filter: String, apiToken: String) {
+        movieViewModel.prepareUpCommingMovieRepo(filter)
     }
+
+
 }

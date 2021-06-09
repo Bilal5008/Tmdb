@@ -21,8 +21,6 @@ import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieListBinding
 import com.digi.tmdb.feature.movielist.adapter.MovieListAdapter
 import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
-import com.digi.tmdb.retrofit.Filter
-import com.digi.tmdb.retrofit.RetroInstance
 import com.digi.tmdb.utils.AppConstants
 import com.digi.tmdb.utils.internetconnectivity.ConnectionLiveData
 
@@ -33,6 +31,8 @@ class MovieListFragment : Fragment(), LifecycleOwner {
     private lateinit var movieViewModel: MovieListViewModel
     private var query: String = ""
     private lateinit var movieListAdapter: MovieListAdapter
+    private lateinit var factory: GlobalViewModelFactory
+    private lateinit var listApiManager: ListApiManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,17 +40,18 @@ class MovieListFragment : Fragment(), LifecycleOwner {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
-        movieViewModel =
-            ViewModelProvider(this, GlobalViewModelFactory(ApiHelper(RetroInstance.apiService))).get(
-                MovieListViewModel::class.java
-            )
 
+        movieViewModel =
+            ViewModelProvider(this, GlobalViewModelFactory()).get(MovieListViewModel::class.java)
+        listApiManager = ListApiManager()
         return binding.root
     }
 
-    private fun loadAPIData(query: String) {
-        if (query.isEmpty()) return
-        movieViewModel.prepareMovieRepo(query)
+    private fun loadAPIData() {
+        listApiManager.popularMovies(PopularMovies(movieViewModel))
+        listApiManager.nowPlayingMovies(NowPlayingMovies(movieViewModel))
+        listApiManager.upCommingMovies(UpCommingMovies(movieViewModel))
+
     }
 
 
@@ -69,9 +70,9 @@ class MovieListFragment : Fragment(), LifecycleOwner {
                 if (connection?.isConnected == true) {
                     when (connection.type) {
                         AppConstants.WIFI_DATA ->
-                            loadAPIData(Filter.POPULAR.filter)
+                            loadAPIData()
                         AppConstants.CELL_DATA ->
-                            loadAPIData(Filter.POPULAR.filter)
+                            loadAPIData()
                     }
                 } else {
                     binding.rvArtist.isInvisible
@@ -99,7 +100,7 @@ class MovieListFragment : Fragment(), LifecycleOwner {
             }
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    loadAPIData(query)
+                    loadAPIData()
                     return@setOnEditorActionListener true
                 }
                 false
@@ -108,9 +109,9 @@ class MovieListFragment : Fragment(), LifecycleOwner {
     }
 
     private fun createObserver() {
-        movieViewModel.apply { binding.movieListViewModel = this
-            movieViewModel.movieLiveData.observe(viewLifecycleOwner, Observer {
-
+        movieViewModel.apply {
+            binding.movieListViewModel = this
+            movieViewModel.movieListLiveData.observe(viewLifecycleOwner, Observer {
 
 
                 if (it.results.isNullOrEmpty()) {

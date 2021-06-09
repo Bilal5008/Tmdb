@@ -12,8 +12,6 @@ import com.digi.tmdb.R
 import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieDetailBinding
 import com.digi.tmdb.feature.moviedetail.viewmodel.MovieDetailViewModel
-import com.digi.tmdb.feature.movielist.ApiHelper
-import com.digi.tmdb.retrofit.RetroInstance
 
 
 class MovieDetailFragment : Fragment() {
@@ -29,7 +27,7 @@ class MovieDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
         movieDetailViewModel =
-            ViewModelProvider(this, GlobalViewModelFactory(ApiHelper(RetroInstance.apiService))).get(
+            ViewModelProvider(this, GlobalViewModelFactory()).get(
                 MovieDetailViewModel::class.java
             )
 
@@ -51,13 +49,13 @@ class MovieDetailFragment : Fragment() {
 
     private fun loadAPIData(query: Int) {
 
-        movieDetailViewModel.prepareDetailMovieRepo(query)
+        movieDetailViewModel.prepareMovieDetailRepo(query)
     }
 
     private fun createObserver() {
         movieDetailViewModel.apply {
             binding.movieDetailViewModel = this
-            movieDetailViewModel.movieLiveData.observe(viewLifecycleOwner, Observer {
+            movieDetailViewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
                 it.run {
 
                 }
