@@ -9,8 +9,8 @@ import com.digi.tmdb.databinding.MovieListRecyclerviewItemBinding
 import com.digi.tmdb.feature.movielist.RecyclerViewClickListener
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 
-class MoviesAdapter() : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
-    lateinit var listener: RecyclerViewClickListener
+class MoviesAdapter(private val listener: RecyclerViewClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+
     var artistListData = ArrayList<BaseListResponse?>()
     var filterArtistListData = ArrayList<BaseListResponse?>()
 

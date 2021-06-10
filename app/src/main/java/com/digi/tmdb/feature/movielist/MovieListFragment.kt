@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
@@ -89,8 +91,8 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     private fun setAdapter() {
+        movieListAdapter = MoviesAdapter(this)
         binding.rvArtist.apply {
-            movieListAdapter = MoviesAdapter()
             adapter = movieListAdapter
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
@@ -145,6 +147,8 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
+        var navController: NavController = Navigation.findNavController(view)
+        navController.navigate(R.id.action_movieListFragment_to_movieDetailFragment)
 
     }
 
