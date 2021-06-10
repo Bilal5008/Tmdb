@@ -14,8 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
@@ -38,7 +37,6 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     private lateinit var movieViewModel: MovieListViewModel
     private var query: String = ""
     private lateinit var movieListAdapter: MoviesAdapter
-    private lateinit var factory: GlobalViewModelFactory
     private lateinit var listApiManager: ListApiManager
 
     override fun onCreateView(
@@ -47,7 +45,6 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
-
         movieViewModel =
             ViewModelProvider(this, GlobalViewModelFactory()).get(MovieListViewModel::class.java)
         listApiManager = ListApiManager()
@@ -64,12 +61,9 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setAdapter()
         setSearchBar()
         createObserver()
-
-
         val connectionLiveData =
             ConnectionLiveData(context)
         connectionLiveData.observe(viewLifecycleOwner,
@@ -100,11 +94,13 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     private fun setSearchBar() {
-        binding.etArtistIds.apply {
+
+        binding.searchLayoutId.searchBar.apply {
             doAfterTextChanged {
                 query = it.toString()
                 movieListAdapter.getFilterList(query)
             }
+
             setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     loadAPIData()
@@ -147,8 +143,13 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
-        var navController: NavController = Navigation.findNavController(view)
-        navController.navigate(R.id.action_movieListFragment_to_movieDetailFragment)
+
+        findNavController().navigate(
+            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+                movie!!
+            )
+        )
+
 
     }
 

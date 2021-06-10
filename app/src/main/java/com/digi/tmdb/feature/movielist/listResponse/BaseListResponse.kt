@@ -1,8 +1,10 @@
 package com.digi.tmdb.feature.movielist.listResponse
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 data class BaseListResponse (
 
 	@SerializedName("adult") val adult : Boolean,
@@ -20,10 +22,5 @@ data class BaseListResponse (
 	@SerializedName("vote_average") val vote_average : Double,
 	@SerializedName("vote_count") val vote_count : Int
 
-
-
-
-
-
-)
+) : Parcelable
 

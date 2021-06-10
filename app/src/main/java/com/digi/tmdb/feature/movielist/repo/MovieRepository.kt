@@ -112,7 +112,7 @@ class MovieRepository() {
                                     TAG,
                                     "onError: INTERNAL SERVER ERROR"
                                 )
-                                httpException.code() === 502 -> Log.d(
+                                httpException.code() == 502 -> Log.d(
                                     TAG,
                                     "onError: BAD GATEWAY"
                                 )
