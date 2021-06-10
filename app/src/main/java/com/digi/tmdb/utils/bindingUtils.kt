@@ -1,9 +1,17 @@
 package com.digi.tmdb.utils
 
+import android.graphics.Color
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.digi.tmdb.R
 import com.squareup.picasso.Picasso
+import java.util.*
 
 
 @BindingAdapter("image")
@@ -13,4 +21,21 @@ fun loadImage(view: ImageView, url: String) {
         .error(R.drawable.user_placeholder_error)
         .centerCrop()
         .into(view);
+}
+
+@BindingAdapter("text")
+fun changeTextColor(view: TextView, data: String) {
+
+
+    val separated = data.split("-".toRegex()).toTypedArray()
+    if ((Calendar.getInstance().get(Calendar.YEAR)).toString() == separated[0]) {
+        val wordtoSpan: Spannable = SpannableString(data)
+        wordtoSpan.setSpan(ForegroundColorSpan(Color.RED), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        wordtoSpan.setSpan(StyleSpan(Typeface.BOLD), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        view.text = wordtoSpan
+
+    } else
+        view.text = data
+
+
 }
