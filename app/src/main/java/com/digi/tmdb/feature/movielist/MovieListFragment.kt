@@ -19,18 +19,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
 import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieListBinding
-import com.digi.tmdb.feature.movielist.adapter.MovieListAdapter
+import com.digi.tmdb.feature.movielist.adapter.MoviesAdapter
+import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
+import com.digi.tmdb.feature.movielist.movieListManager.ListApiManager
+import com.digi.tmdb.feature.movielist.movieListManager.NowPlayingMovies
+import com.digi.tmdb.feature.movielist.movieListManager.PopularMovies
+import com.digi.tmdb.feature.movielist.movieListManager.UpComingMovies
 import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
 import com.digi.tmdb.utils.AppConstants
 import com.digi.tmdb.utils.internetconnectivity.ConnectionLiveData
 
 
-class MovieListFragment : Fragment(), LifecycleOwner {
+class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener {
 
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var movieViewModel: MovieListViewModel
     private var query: String = ""
-    private lateinit var movieListAdapter: MovieListAdapter
+    private lateinit var movieListAdapter: MoviesAdapter
     private lateinit var factory: GlobalViewModelFactory
     private lateinit var listApiManager: ListApiManager
 
@@ -50,7 +55,7 @@ class MovieListFragment : Fragment(), LifecycleOwner {
     private fun loadAPIData() {
         listApiManager.popularMovies(PopularMovies(movieViewModel))
         listApiManager.nowPlayingMovies(NowPlayingMovies(movieViewModel))
-        listApiManager.upCommingMovies(UpCommingMovies(movieViewModel))
+        listApiManager.upCommingMovies(UpComingMovies(movieViewModel))
 
     }
 
@@ -85,7 +90,7 @@ class MovieListFragment : Fragment(), LifecycleOwner {
 
     private fun setAdapter() {
         binding.rvArtist.apply {
-            movieListAdapter = MovieListAdapter()
+            movieListAdapter = MoviesAdapter()
             adapter = movieListAdapter
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
@@ -137,6 +142,10 @@ class MovieListFragment : Fragment(), LifecycleOwner {
                 }
             })
         }
+    }
+
+    override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
+
     }
 
 

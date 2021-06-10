@@ -1,3 +1,4 @@
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
@@ -120,6 +121,6 @@ dependencies {
 
     //loading kit
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

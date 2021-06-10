@@ -1,4 +1,4 @@
-package com.digi.tmdb.feature.movielist
+package com.digi.tmdb.feature.movielist.movieListManager
 
 import com.digi.tmdb.retrofit.Filter
 import com.digi.tmdb.utils.AppConstants
@@ -9,7 +9,7 @@ class ListApiManager {
         popularMovies.getMovies(Filter.POPULAR.filter, AppConstants.API_TOKEN)
     }
 
-    fun upCommingMovies(upCommingMovies: UpCommingMovies) {
+    fun upCommingMovies(upCommingMovies: UpComingMovies) {
         upCommingMovies.getUpComingMovies(Filter.POPULAR.filter, AppConstants.API_TOKEN)
 
     }

@@ -1,4 +1,4 @@
-package com.digi.tmdb.feature.movielist
+package com.digi.tmdb.feature.movielist.movieListManager
 
 import com.digi.tmdb.feature.movielist.list_api_interface.IPopularMovies
 import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel

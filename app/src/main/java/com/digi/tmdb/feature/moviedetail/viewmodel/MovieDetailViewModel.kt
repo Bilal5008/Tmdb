@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.digi.tmdb.feature.moviedetail.movieresponse.MovieDetailResponse
+import com.digi.tmdb.feature.movielist.repo.MovieRepository
 
 class MovieDetailViewModel() : ViewModel() {
 
@@ -12,11 +13,11 @@ class MovieDetailViewModel() : ViewModel() {
     val movieDetailLiveData: LiveData<MovieDetailResponse> = movieDetailResponse
 
     fun prepareMovieDetailRepo(name: Int) {
-//        MovieRepository()
-//            .getMovieDetailObserverRx(name)
-//            .subscribe {
-//                movieDetailResponse.postValue(it)
-//            }
+        MovieRepository()
+            .getMovieDetailObserverRx(name)
+            .subscribe {
+                movieDetailResponse.postValue(it)
+            }
     }
 
 

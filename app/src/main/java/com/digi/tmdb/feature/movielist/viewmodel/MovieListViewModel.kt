@@ -3,7 +3,6 @@ package com.digi.tmdb.feature.movielist.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.digi.tmdb.feature.movielist.ApiHelper
 import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
 import com.digi.tmdb.feature.movielist.repo.MovieRepository
 
