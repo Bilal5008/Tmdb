@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieDetailBinding
 import com.digi.tmdb.feature.moviedetail.viewmodel.MovieDetailViewModel
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
+import com.digi.tmdb.utils.doubleToStringNoDecimal
 import com.squareup.picasso.Picasso
 
 
@@ -44,7 +46,13 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addBackPress()
+//        requireActivity().onBackPressedDispatcher
+//            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                   println("")
+//
+//                }
+//            })
 
 
         val message = arguments?.getParcelable<BaseListResponse>("movie")?.id
@@ -54,12 +62,12 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun addBackPress() {
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner)
-        {
-            findNavController().navigate(
-                MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieListFragment()
-            )
-        }
+//        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner)
+//        {
+//            findNavController().navigate(
+//                MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieListFragment()
+//            )
+//        }
     }
 
 
@@ -77,12 +85,12 @@ class MovieDetailFragment : Fragment() {
 
                         loadImage(posterImage, it.poster_path)
                         loadImage(backdropImage, it.backdrop_path)
-                        tvDuration.text = it.runtime.toString()
-                        tvOverview.text = it.overview
+                        tvMovieDuration.text = "${it.runtime} mins"
+                        tvOverview.text = "Overview : ${it.overview}"
                         tvName.text = it.original_title
-                        tvVote.text =
-                            "Average Vote" + it.vote_average.toString() + "/" + "Total count" + it.vote_count.toString()
-//                        movieRelatedTitle.text = it.original_title
+                        tvAverageVote.text = it.vote_average.toString()
+                        tvTotalVote.text = it.vote_count.toString()
+                        tvRevenue.text = doubleToStringNoDecimal( it.revenue)
                     }
                 }
 

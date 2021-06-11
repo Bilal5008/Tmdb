@@ -76,7 +76,7 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
                             loadAPIData()
                     }
                 } else {
-                    binding.rvArtist.isInvisible
+                    binding.rvMovieList.isInvisible
                     movieListAdapter.artistListData.clear()
                     movieListAdapter.notifyDataSetChanged()
 
@@ -86,7 +86,7 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
 
     private fun setAdapter() {
         movieListAdapter = MoviesAdapter(this)
-        binding.rvArtist.apply {
+        binding.rvMovieList.apply {
             adapter = movieListAdapter
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
@@ -109,6 +109,7 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
                 false
             }
         }
+        binding.searchLayoutId.searchBar.text.clear()
     }
 
     private fun createObserver() {
@@ -122,12 +123,12 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
 
                     binding.apply {
                         tvArtistItemsTitle.isVisible
-                        rvArtist.isVisible
+                        rvMovieList.isVisible
                     }
 
                     binding.apply {
                         tvArtistItemsTitle.isInvisible
-                        rvArtist.isInvisible
+                        rvMovieList.isInvisible
                     }
                 } else {
                     movieListAdapter.apply {

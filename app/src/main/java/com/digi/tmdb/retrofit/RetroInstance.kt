@@ -1,5 +1,6 @@
 package com.digi.tmdb.retrofit
 
+import com.digi.tmdb.utils.AppConstants.baseURL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetroInstance {
 
     companion object {
-        const val baseURL = "https://api.themoviedb.org/3/"
+
 
         fun getRetroInstance(): Retrofit {
 

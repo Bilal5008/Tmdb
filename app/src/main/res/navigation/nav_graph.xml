@@ -13,9 +13,8 @@
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@+id/movieListFragment"
-            app:popUpToInclusive="true" />
+
+          />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -26,9 +25,7 @@
 
             android:name="movie"
             app:argType="com.digi.tmdb.feature.movielist.listResponse.BaseListResponse" />
-        <action
-            android:id="@+id/action_movieDetailFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment" />
+
     </fragment>
 
 </navigation>

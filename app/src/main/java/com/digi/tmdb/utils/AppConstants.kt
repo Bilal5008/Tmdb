@@ -6,6 +6,7 @@ object AppConstants {
     const val WIFI_DATA = 1
     const val CELL_DATA = 2
 
+    const val baseURL = "https://api.themoviedb.org/3/"
     const val EMPTY_STRING = ""
 
     // Error codes
