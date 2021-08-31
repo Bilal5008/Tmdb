@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -23,9 +24,7 @@ import com.digi.tmdb.databinding.FragmentMovieListBinding
 import com.digi.tmdb.feature.movielist.adapter.MoviesAdapter
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 import com.digi.tmdb.feature.movielist.movieListManager.ListApiManager
-import com.digi.tmdb.feature.movielist.movieListManager.NowPlayingMovies
 import com.digi.tmdb.feature.movielist.movieListManager.PopularMovies
-import com.digi.tmdb.feature.movielist.movieListManager.UpComingMovies
 import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
 import com.digi.tmdb.utils.AppConstants
 import com.digi.tmdb.utils.internetconnectivity.ConnectionLiveData
@@ -53,8 +52,8 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
 
     private fun loadAPIData() {
         listApiManager.popularMovies(PopularMovies(movieViewModel))
-        listApiManager.nowPlayingMovies(NowPlayingMovies(movieViewModel))
-        listApiManager.upCommingMovies(UpComingMovies(movieViewModel))
+//        listApiManager.nowPlayingMovies(NowPlayingMovies(movieViewModel))
+//        listApiManager.upCommingMovies(UpComingMovies(movieViewModel))
 
     }
 
@@ -113,34 +112,55 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     private fun createObserver() {
-        movieViewModel.apply {
-            binding.movieListViewModel = this
-            movieViewModel.movieListLiveData.observe(viewLifecycleOwner, Observer {
+        movieViewModel.movieList.observe(viewLifecycleOwner, {
+            movieListAdapter.apply {
+                artistListData = it as ArrayList<BaseListResponse?>
+                filterArtistListData = artistListData
+                notifyDataSetChanged()
+            }
+        })
+
+        movieViewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
+        movieViewModel.loading.observe(viewLifecycleOwner, Observer {
+//            if (it) {
+//                binding.progressDialog.visibility = View.VISIBLE
+//            } else {
+//                binding.progressDialog.visibility = View.GONE
+//            }
+        })
 
 
-                if (it.results.isNullOrEmpty()) {
-
-
-                    binding.apply {
-                        tvArtistItemsTitle.isVisible
-                        rvMovieList.isVisible
-                    }
-
-                    binding.apply {
-                        tvArtistItemsTitle.isInvisible
-                        rvMovieList.isInvisible
-                    }
-                } else {
-                    movieListAdapter.apply {
-                        artistListData = ArrayList(it.results)
-                        filterArtistListData = artistListData
-                        notifyDataSetChanged()
-                    }
-
-
-                }
-            })
-        }
+//        movieViewModel.apply {
+//            binding.movieListViewModel = this
+//            movieViewModel.movieListLiveData.observe(viewLifecycleOwner, Observer {
+//
+//
+//                if (it.results.isNullOrEmpty()) {
+//
+//
+//                    binding.apply {
+//                        tvArtistItemsTitle.isVisible
+//                        rvMovieList.isVisible
+//                    }
+//
+//                    binding.apply {
+//                        tvArtistItemsTitle.isInvisible
+//                        rvMovieList.isInvisible
+//                    }
+//                } else {
+//                    movieListAdapter.apply {
+//                        artistListData = ArrayList(it.results)
+//                        filterArtistListData = artistListData
+//                        notifyDataSetChanged()
+//                    }
+//
+//
+//                }
+//            })
+//        }
     }
 
     override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {

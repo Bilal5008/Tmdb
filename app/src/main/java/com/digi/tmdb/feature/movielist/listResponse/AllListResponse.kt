@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 data class AllListResponse(
 
     @SerializedName("page") val page: Int,
-    @SerializedName("results") val results: List<BaseListResponse>,
+    @SerializedName("results") val results: ArrayList<BaseListResponse>,
     @SerializedName("total_pages") val total_pages: Int,
     @SerializedName("total_results") val total_results: Int,
 

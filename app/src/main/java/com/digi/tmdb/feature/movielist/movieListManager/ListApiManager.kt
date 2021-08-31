@@ -9,13 +9,13 @@ class ListApiManager {
         popularMovies.getMovies(Filter.UPCOMING.filter, AppConstants.API_TOKEN)
     }
 
-    fun upCommingMovies(upCommingMovies: UpComingMovies) {
-        upCommingMovies.getUpComingMovies(Filter.POPULAR.filter, AppConstants.API_TOKEN)
-
-    }
-
-    fun nowPlayingMovies(nowPlayingMovies: NowPlayingMovies) {
-
-        nowPlayingMovies.getNowPlayingMovies(Filter.NOW_PLAYING.filter, AppConstants.API_TOKEN)
-    }
+//    fun upCommingMovies(upCommingMovies: UpComingMovies) {
+//        upCommingMovies.getUpComingMovies(Filter.POPULAR.filter, AppConstants.API_TOKEN)
+//
+//    }
+//
+//    fun nowPlayingMovies(nowPlayingMovies: NowPlayingMovies) {
+//
+//        nowPlayingMovies.getNowPlayingMovies(Filter.NOW_PLAYING.filter, AppConstants.API_TOKEN)
+//    }
 }
