@@ -9,23 +9,6 @@
         android:id="@+id/movieListFragment"
         android:name="com.digi.tmdb.feature.movielist.MovieListFragment"
         android:label="fragment_my_home"
-        tools:layout="@layout/fragment_movie_list">
-        <action
-            android:id="@+id/action_movieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment"
-
-          />
-    </fragment>
-    <fragment
-        android:id="@+id/movieDetailFragment"
-        android:name="com.digi.tmdb.feature.moviedetail.MovieDetailFragment"
-        android:label="fragment_movie_detail"
-        tools:layout="@layout/fragment_movie_detail">
-        <argument
-
-            android:name="movie"
-            app:argType="com.digi.tmdb.feature.movielist.listResponse.BaseListResponse" />
-
-    </fragment>
+        tools:layout="@layout/fragment_movie_list"/>
 
 </navigation>

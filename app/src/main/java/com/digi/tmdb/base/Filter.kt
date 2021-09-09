@@ -1,4 +1,4 @@
-package com.digi.tmdb.retrofit
+package com.digi.tmdb.base
 
 enum class Filter(var filter: String) {
 

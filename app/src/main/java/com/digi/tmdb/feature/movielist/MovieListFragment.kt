@@ -6,37 +6,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.digi.tmdb.R
-import com.digi.tmdb.base.factory.GlobalViewModelFactory
 import com.digi.tmdb.databinding.FragmentMovieListBinding
 import com.digi.tmdb.feature.movielist.adapter.MoviesAdapter
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 import com.digi.tmdb.feature.movielist.movieListManager.ListApiManager
 import com.digi.tmdb.feature.movielist.movieListManager.PopularMovies
 import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
-import com.digi.tmdb.utils.AppConstants
-import com.digi.tmdb.utils.internetconnectivity.ConnectionLiveData
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener {
+@AndroidEntryPoint
+class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener
+{
 
     private lateinit var binding: FragmentMovieListBinding
-    private lateinit var movieViewModel: MovieListViewModel
+    private val movieViewModel: MovieListViewModel by viewModels()
     private var query: String = ""
     private lateinit var movieListAdapter: MoviesAdapter
     private lateinit var listApiManager: ListApiManager
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +39,8 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
-        movieViewModel =
-            ViewModelProvider(this, GlobalViewModelFactory()).get(MovieListViewModel::class.java)
+//        movieViewModel =
+//            ViewModelProvider(this, GlobalViewModelFactory()).get(MovieListViewModel::class.java)
         listApiManager = ListApiManager()
         return binding.root
     }
@@ -58,29 +53,14 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setAdapter()
         setSearchBar()
         createObserver()
-        val connectionLiveData =
-            ConnectionLiveData(context)
-        connectionLiveData.observe(viewLifecycleOwner,
-            { connection ->
-                if (connection?.isConnected == true) {
-                    when (connection.type) {
-                        AppConstants.WIFI_DATA ->
-                            loadAPIData()
-                        AppConstants.CELL_DATA ->
-                            loadAPIData()
-                    }
-                } else {
-                    binding.rvMovieList.isInvisible
-                    movieListAdapter.artistListData.clear()
-                    movieListAdapter.notifyDataSetChanged()
-
-                }
-            })
+        loadAPIData()
     }
 
     private fun setAdapter() {
@@ -91,6 +71,7 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
             addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
         }
     }
+
 
     private fun setSearchBar() {
 
@@ -112,7 +93,7 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
     }
 
     private fun createObserver() {
-        movieViewModel.movieList.observe(viewLifecycleOwner, {
+        movieViewModel.mutableMovieList.observe(viewLifecycleOwner, {
             movieListAdapter.apply {
                 artistListData = it as ArrayList<BaseListResponse?>
                 filterArtistListData = artistListData
@@ -120,17 +101,17 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
             }
         })
 
-        movieViewModel.errorMessage.observe(viewLifecycleOwner, {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-        })
-
-        movieViewModel.loading.observe(viewLifecycleOwner, Observer {
-//            if (it) {
-//                binding.progressDialog.visibility = View.VISIBLE
-//            } else {
-//                binding.progressDialog.visibility = View.GONE
-//            }
-        })
+//        movieViewModel.errorMessage.observe(viewLifecycleOwner, {
+//            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+//        })
+//
+//        movieViewModel.loading.observe(viewLifecycleOwner, Observer {
+////            if (it) {
+////                binding.progressDialog.visibility = View.VISIBLE
+////            } else {
+////                binding.progressDialog.visibility = View.GONE
+////            }
+//        })
 
 
 //        movieViewModel.apply {
@@ -165,14 +146,6 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener 
 
     override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
 
-        findNavController().navigate(
-            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
-                movie!!
-            )
-        )
-
-
     }
-
 
 }

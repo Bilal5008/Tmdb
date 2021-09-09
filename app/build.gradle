@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs'
     id 'kotlin-parcelize'
+    id 'dagger.hilt.android.plugin'
 
 }
 
@@ -38,14 +39,19 @@ android {
     dataBinding {
         enabled = true
     }
-
+    kapt {
+        correctErrorTypes true
+        generateStubs = true
+    }
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
 }
 
 dependencies {
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
@@ -58,16 +64,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
-    def room_version = "2.3.0"
-
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:$room_version"
-
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
     // Retrofit
     def retrofit_version = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -89,8 +86,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
-    //Data Binding
-    kapt 'com.android.databinding:compiler:3.1.4'
+
 
     def logging_version = "4.9.0"
     implementation "com.squareup.okhttp3:okhttp:$logging_version"
@@ -154,7 +150,10 @@ dependencies {
         exclude module: 'appcompat-v7'
     }
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
 
+
+    implementation 'com.google.dagger:hilt-android:2.38.1'
+    kapt 'com.google.dagger:hilt-android-compiler:2.38.1'
 
 }

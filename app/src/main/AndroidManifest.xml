@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApplication"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:largeHeap="true"
@@ -16,6 +17,7 @@
         android:theme="@style/Theme.Tmdb">
 
         <activity
+            android:exported="true"
 
             android:name="com.digi.tmdb.base.view.MovieActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden">
