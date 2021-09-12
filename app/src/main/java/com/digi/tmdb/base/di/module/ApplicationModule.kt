@@ -38,7 +38,9 @@ class ApplicationModule {
         Retrofit.Builder()
             .baseUrl(AppConstants.baseURL)
             .client(OkHttpClient.Builder().build())
+
             .addConverterFactory(GsonConverterFactory.create())
+
             .build()
 
 
