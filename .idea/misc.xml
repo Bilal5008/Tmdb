@@ -5,7 +5,10 @@
       <map>
         <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/activity_movie.xml" value="0.1" />
         <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/fragment_movie_detail.xml" value="0.1890625" />
+        <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/fragment_movie_empty.xml" value="0.17916666666666667" />
         <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/fragment_movie_list.xml" value="0.1" />
+        <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/movie_list_recyclerview_item.xml" value="0.1609375" />
+        <entry key="..\:/MyProject/Tmdb/app/src/main/res/layout/search_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

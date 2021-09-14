@@ -32,4 +32,20 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/movieEmptyFragment"
+        android:name="com.digi.tmdb.feature.moviedetail.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail">
+
+
+        <action
+            android:id="@+id/action_movieEmptyFragment_to_movieEmptyFragment2"
+            app:destination="@id/movieEmptyFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieEmptyFragment2"
+        android:name="com.digi.tmdb.feature.MovieEmptyFragment"
+        android:label="MovieEmptyFragment" />
+
 </navigation>

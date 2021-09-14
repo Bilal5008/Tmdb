@@ -11,6 +11,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.intent.rule.IntentsTestRule
 import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import com.digi.tmdb.base.view.MovieActivity
@@ -27,31 +28,13 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class UiTesting {
-    @get:Rule
-    var activityRule: ActivityTestRule<MovieActivity> = ActivityTestRule<MovieActivity>(
-        MovieActivity::class.java,
-        true,  // initialTouchMode
-        false
-    ) // launchActivity. False to customize the intent
+    @get : Rule
+    val activityRule = ActivityScenarioRule(MovieActivity::class.java)
 
-
-    @Test
-    fun intent() {
-        val intent = Intent()
-
-        activityRule.launchActivity(intent)
-
-        // Continue with your test
-    }
 
     @Test
     fun recyclerTest() {
-
-        var firstActivity: IntentsTestRule<MovieActivity> = IntentsTestRule(MovieActivity::class.java)
-        firstActivity.launchActivity(Intent())
-
-        onView(isRoot()).perform(waitFor(2000))
-
+        onView(isRoot()).perform(waitFor(5000))
         onView(withId(R.id.rv_movie_list)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 2,
