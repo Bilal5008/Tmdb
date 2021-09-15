@@ -1,37 +1,26 @@
 package com.digi.tmdb
 
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.UiController
+import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.digi.tmdb.base.view.MovieActivity
-import net.bytebuddy.matcher.ElementMatchers.`is`
-import org.hamcrest.CoreMatchers.instanceOf
+import org.hamcrest.Description
 import org.hamcrest.Matcher
+import org.hamcrest.TypeSafeMatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.EnumSet.allOf
-
-import androidx.test.espresso.Espresso.onData
-
-import androidx.test.espresso.Espresso.onData
-import android.view.ViewGroup
-import androidx.test.espresso.*
-import androidx.test.espresso.contrib.RecyclerViewActions.scrollToHolder
-import androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition
-import androidx.test.espresso.matcher.ViewMatchers.*
-import com.android.dx.dex.file.Item
-import org.hamcrest.Description
-import org.hamcrest.TypeSafeMatcher
-import org.mockito.ArgumentMatchers.matches
 
 
 @RunWith(AndroidJUnit4ClassRunner::class)

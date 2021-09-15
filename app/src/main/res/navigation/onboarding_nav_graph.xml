@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/onBoardingFragmentOne">
+    <fragment
+        android:id="@+id/onBoardingFragmentOne"
+        android:name="com.digi.tmdb.feature.onboarding.OnBoardingFragmentOne"
+        android:label="OnBoardingFragmentOne" >
+        <action
+            android:id="@+id/action_onBoardingFragmentOne_to_onBoardingFragmentTwo"
+            app:destination="@id/onBoardingFragmentTwo" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragmentTwo"
+        android:name="com.digi.tmdb.feature.onboarding.OnBoardingFragmentTwo"
+        android:label="OnBoardingFragmentTwo" >
+        <action
+            android:id="@+id/action_onBoardingFragmentTwo_to_onBoardingFragmentThree"
+            app:destination="@id/onBoardingFragmentThree" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingFragmentThree"
+        android:name="com.digi.tmdb.feature.onboarding.OnBoardingFragmentThree"
+        android:label="OnBoardingFragmentThree" />
+</navigation>

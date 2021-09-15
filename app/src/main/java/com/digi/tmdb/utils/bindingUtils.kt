@@ -17,14 +17,21 @@ import java.util.*
 
 
 @BindingAdapter("image")
-fun loadImage(view: ImageView, url: String) {
+fun loadImage(view: ImageView, url: String?) {
     Picasso.get().load("http://image.tmdb.org/t/p/w500$url")
         .placeholder(R.drawable.user_placeholder)
         .error(R.drawable.user_placeholder_error)
         .into(view);
 }
+@BindingAdapter("imagedetail")
+fun loadDetailImage(view: ImageView, url: String?) {
+    Picasso.get().load("http://image.tmdb.org/t/p/w500$url").centerCrop().resize(100, 199)
+        .placeholder(R.drawable.user_placeholder)
+        .error(R.drawable.user_placeholder_error)
+        .into(view);
+}
 
-@BindingAdapter("text")
+@BindingAdapter("redtext")
 fun changeTextColor(view: TextView, data: String) {
 
 

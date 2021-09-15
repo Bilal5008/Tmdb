@@ -22,7 +22,7 @@ class MovieDetailFragment : Fragment() {
 
 //    private val args: MovieDetailArgs by navArgs()
 
-    private  val movieDetailViewModel: MovieDetailViewModel by viewModels()
+    private  val viewModel: MovieDetailViewModel by viewModels()
     private lateinit var binding: FragmentMovieDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +34,8 @@ class MovieDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
 
+        binding.movieDetailViewModel = viewModel
+        binding.lifecycleOwner = this
         return binding.root
 
 
@@ -51,7 +53,7 @@ class MovieDetailFragment : Fragment() {
 
 
         val message = arguments?.getParcelable<BaseListResponse>("movie")?.id
-        createObserver()
+//        createObserver()
         message?.let { loadAPIData(it) }
 
     }
@@ -68,13 +70,13 @@ class MovieDetailFragment : Fragment() {
 
     private fun loadAPIData(query: Int) {
 
-        movieDetailViewModel.prepareMovieDetailRepo(query)
+        viewModel.prepareMovieDetailRepo(query)
     }
 
     private fun createObserver() {
-        movieDetailViewModel.apply {
+        viewModel.apply {
             binding.movieDetailViewModel = this
-            movieDetailViewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
+            viewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
                 it.run {
                     binding.apply {
 

@@ -3,13 +3,17 @@ package com.digi.tmdb.feature.movielist.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.digi.tmdb.R
 import com.digi.tmdb.databinding.MovieListRecyclerviewItemBinding
 import com.digi.tmdb.feature.movielist.RecyclerViewClickListener
+import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 
-class MoviesAdapter(private val listener: RecyclerViewClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(
+    private val listener: RecyclerViewClickListener,
+) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     var artistListData = ArrayList<BaseListResponse?>()
     var filterArtistListData = ArrayList<BaseListResponse?>()

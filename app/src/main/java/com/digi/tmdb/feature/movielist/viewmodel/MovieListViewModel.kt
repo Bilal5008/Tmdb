@@ -12,6 +12,7 @@ import javax.inject.Inject
 class MovieListViewModel @Inject constructor(
     private val mainRepository: MainRepository
 ) : ViewModel() {
+     var mquery  = MutableLiveData<String>()
 
     private val errorMessage = MutableLiveData<String>()
     private val _movieList = MutableLiveData<ArrayList<AllListResponse>>()
