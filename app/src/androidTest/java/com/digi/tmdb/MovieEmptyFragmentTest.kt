@@ -6,13 +6,8 @@ import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.matcher.ViewMatchers
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import com.digi.tmdb.base.view.MovieActivity
 import com.digi.tmdb.feature.MovieEmptyFragment
-import com.digi.tmdb.feature.moviedetail.MovieDetailFragment
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito

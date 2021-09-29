@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="movieDetailViewModel"
+            name="viewModel"
             type="com.digi.tmdb.feature.moviedetail.viewmodel.MovieDetailViewModel" />
 
 
@@ -25,7 +25,7 @@
             android:padding="10dp">
 
             <ImageView
-                app:imagedetail="@{movieDetailViewModel.movieDetailLiveData.backdrop_path}"
+                app:imagedetail="@{viewModel.movieDetailLiveData.backdrop_path}"
                 android:id="@+id/backdrop_image"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
@@ -36,7 +36,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                app:imagedetail="@{movieDetailViewModel.movieDetailLiveData.poster_path}"
+                app:imagedetail="@{viewModel.movieDetailLiveData.poster_path}"
                 android:id="@+id/poster_image"
                 android:layout_width="150dp"
                 android:layout_height="220dp"
@@ -66,7 +66,7 @@
 
 
                 <TextView
-                    android:text="@{movieDetailViewModel.movieDetailLiveData.original_title}"
+                    android:text="@{viewModel.movieDetailLiveData.original_title}"
                     android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -123,7 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{Double.toString(movieDetailViewModel.movieDetailLiveData.vote_average)}"
+                        android:text="@{Double.toString(viewModel.movieDetailLiveData.vote_average)}"
                         app:layout_constraintEnd_toEndOf="@+id/ib_average_vote"
                         app:layout_constraintStart_toStartOf="@+id/ib_average_vote"
                         app:layout_constraintTop_toBottomOf="@+id/ib_average_vote" />
@@ -140,7 +140,7 @@
                         app:layout_constraintTop_toTopOf="@+id/ib_average_vote" />
 
                     <TextView
-                        android:text="@{Integer.toString(movieDetailViewModel.movieDetailLiveData.runtime)}"
+                        android:text="@{Integer.toString(viewModel.movieDetailLiveData.runtime)}"
                         android:id="@+id/tv_movie_duration"
                         android:layout_width="3dp"
                         android:layout_height="15dp"
@@ -166,7 +166,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@{Integer.toString(movieDetailViewModel.movieDetailLiveData.revenue)}"
+                        android:text="@{Integer.toString(viewModel.movieDetailLiveData.revenue)}"
 
                         app:layout_constraintEnd_toEndOf="@+id/iv_revenue"
                         app:layout_constraintStart_toStartOf="@+id/iv_revenue"
@@ -243,7 +243,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:text="@{Double.toString(movieDetailViewModel.movieDetailLiveData.vote_average)}"
+                        android:text="@{Double.toString(viewModel.movieDetailLiveData.vote_average)}"
                         android:id="@+id/tv_total_vote"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -254,7 +254,7 @@
 
 
                     <TextView
-                        android:text="@{movieDetailViewModel.movieDetailLiveData.overview}"
+                        android:text="@{viewModel.movieDetailLiveData.overview}"
                         android:id="@+id/tv_overview"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"

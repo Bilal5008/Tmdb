@@ -2,6 +2,7 @@ package com.digi.tmdb.feature.movielist.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.digi.tmdb.base.BaseViewModel
 import com.digi.tmdb.feature.movielist.listResponse.AllListResponse
 import com.digi.tmdb.feature.repo.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -11,8 +12,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
     private val mainRepository: MainRepository
-) : ViewModel() {
-     var mquery  = MutableLiveData<String>()
+) : BaseViewModel() {
+    var mquery = MutableLiveData<String>()
 
     private val errorMessage = MutableLiveData<String>()
     private val _movieList = MutableLiveData<ArrayList<AllListResponse>>()
@@ -22,15 +23,17 @@ class MovieListViewModel @Inject constructor(
 
     fun prepareMovieListRepo(name: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
+
             val response = mainRepository.getMovieListObserverRx(name)
             withContext(Dispatchers.Main) {
-
+                showLoading()
                 if (response.isSuccessful) {
 
                     _movieList.postValue(response.body()?.results as ArrayList<AllListResponse>)
-//                    loading.value = false
+                    hideLoading()
                 } else {
                     onError("Error : ${response.message()} ")
+                    hideLoading()
                 }
             }
         }

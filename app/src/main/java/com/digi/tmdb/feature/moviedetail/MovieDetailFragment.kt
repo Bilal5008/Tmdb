@@ -22,7 +22,7 @@ class MovieDetailFragment : Fragment() {
 
 //    private val args: MovieDetailArgs by navArgs()
 
-    private  val viewModel: MovieDetailViewModel by viewModels()
+    private val viewModel: MovieDetailViewModel by viewModels()
     private lateinit var binding: FragmentMovieDetailBinding
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +34,7 @@ class MovieDetailFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
 
-        binding.movieDetailViewModel = viewModel
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         return binding.root
 
@@ -75,7 +75,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun createObserver() {
         viewModel.apply {
-            binding.movieDetailViewModel = this
+            binding.viewModel = this
             viewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
                 it.run {
                     binding.apply {
@@ -87,7 +87,7 @@ class MovieDetailFragment : Fragment() {
                         tvName.text = it.original_title
                         tvAverageVote.text = it.vote_average.toString()
                         tvTotalVote.text = it.vote_count.toString()
-                        tvRevenue.text = doubleToStringNoDecimal( it.revenue)
+                        tvRevenue.text = doubleToStringNoDecimal(it.revenue)
                     }
                 }
 
