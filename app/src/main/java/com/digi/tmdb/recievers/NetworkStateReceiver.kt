@@ -7,59 +7,59 @@ import android.net.ConnectivityManager
 import java.util.*
 
 class NetworkStateReceiver : BroadcastReceiver() {
-    //region Properties
-    private var listeners: MutableList<NetworkStateReceiverListener> = ArrayList()
-    private var connected = false
+  //region Properties
+  private var listeners: MutableList<NetworkStateReceiverListener> = ArrayList()
+  private var connected = false
 
-    //endregion
+  //endregion
 
-    //region Lifecycle
+  //region Lifecycle
 
-    override fun onReceive(context: Context?, intent: Intent?) {
-        if (intent?.extras == null) {
-            return
-        }
-        if (context != null) {
-            val manager =
-                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val ni = manager.activeNetworkInfo
-            connected = ni != null && ni.isConnected
-            notifyStateToAll()
-        }
+  override fun onReceive(context: Context?, intent: Intent?) {
+    if (intent?.extras == null) {
+      return
     }
-
-    //endregion
-
-    //region private Method
-
-    private fun notifyStateToAll() {
-        for (listener in listeners)
-            notifyState(listener)
+    if (context != null) {
+      val manager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+      val ni = manager.activeNetworkInfo
+      connected = ni != null && ni.isConnected
+      notifyStateToAll()
     }
+  }
 
-    private fun notifyState(listener: NetworkStateReceiverListener) {
-        when {
-            connected -> listener.networkAvailable()
-            else -> listener.networkUnavailable()
-        }
+  //endregion
+
+  //region private Method
+
+  private fun notifyStateToAll() {
+    for (listener in listeners)
+      notifyState(listener)
+  }
+
+  private fun notifyState(listener: NetworkStateReceiverListener) {
+    when {
+      connected -> listener.networkAvailable()
+      else -> listener.networkUnavailable()
     }
+  }
 
-    open fun addListener(l: NetworkStateReceiverListener) {
-        listeners.add(l)
-        notifyState(l)
-    }
+  open fun addListener(l: NetworkStateReceiverListener) {
+    listeners.add(l)
+    notifyState(l)
+  }
 
-    open fun removeListener(l: NetworkStateReceiverListener) {
-        listeners.remove(l)
-    }
+  open fun removeListener(l: NetworkStateReceiverListener) {
+    listeners.remove(l)
+  }
 
-    //endregion
+  //endregion
 
-    //region Interface
+  //region Interface
 
-    interface NetworkStateReceiverListener {
-        fun networkAvailable()
-        fun networkUnavailable()
-    }
-    //endregion
+  interface NetworkStateReceiverListener {
+    fun networkAvailable()
+    fun networkUnavailable()
+  }
+  //endregion
 }

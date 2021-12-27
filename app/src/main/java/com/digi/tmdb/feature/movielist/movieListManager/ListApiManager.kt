@@ -6,8 +6,8 @@ import com.digi.tmdb.utils.AppConstants
 
 class ListApiManager {
 
-    fun popularMovies(popularMovies: PopularMovies) {
-        popularMovies.getMovies(Filter.UPCOMING.filter, AppConstants.API_TOKEN)
-    }
+  fun popularMovies(popularMovies: PopularMovies) {
+    popularMovies.getMovies(Filter.UPCOMING.filter, AppConstants.API_TOKEN)
+  }
 
 }

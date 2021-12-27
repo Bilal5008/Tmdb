@@ -10,41 +10,41 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    private val mainRepository: MainRepository
+  private val mainRepository: MainRepository
 ) : ViewModel() {
 
-    private val errorMessage = MutableLiveData<String>()
-    private val _movieList = MutableLiveData<ArrayList<AllListResponse>>()
-    val mutableMovieList: MutableLiveData<ArrayList<AllListResponse>>
-        get() = _movieList
-    var job: Job? = null
+  private val errorMessage = MutableLiveData<String>()
+  private val _movieList = MutableLiveData<ArrayList<AllListResponse>>()
+  val mutableMovieList: MutableLiveData<ArrayList<AllListResponse>>
+    get() = _movieList
+  var job: Job? = null
 
-    fun prepareMovieListRepo(name: String) {
-        job = CoroutineScope(Dispatchers.IO).launch {
-            val response = mainRepository.getMovieListObserverRx(name)
-            withContext(Dispatchers.Main) {
+  fun prepareMovieListRepo(name: String) {
+    job = CoroutineScope(Dispatchers.IO).launch {
+      val response = mainRepository.getMovieListObserverRx(name)
+      withContext(Dispatchers.Main) {
 
-                if (response.isSuccessful) {
+        if (response.isSuccessful) {
 
-                    _movieList.postValue(response.body()?.results as ArrayList<AllListResponse>)
+          _movieList.postValue(response.body()?.results as ArrayList<AllListResponse>)
 //                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
-                }
-            }
+        } else {
+          onError("Error : ${response.message()} ")
         }
-
+      }
     }
 
-    private fun onError(message: String) {
-        errorMessage.value = message
+  }
+
+  private fun onError(message: String) {
+    errorMessage.value = message
 //        loading.value = false
-    }
+  }
 
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
-    }
+  override fun onCleared() {
+    super.onCleared()
+    job?.cancel()
+  }
 
 
 }

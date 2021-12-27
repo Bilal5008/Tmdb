@@ -25,83 +25,81 @@ import com.digi.tmdb.feature.movielist.viewmodel.MovieListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener
-{
+class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener {
 
-    private lateinit var binding: FragmentMovieListBinding
-    private val movieViewModel: MovieListViewModel by viewModels()
-    private var query: String = ""
-    private lateinit var movieListAdapter: MoviesAdapter
-    private lateinit var listApiManager: ListApiManager
+  private lateinit var binding: FragmentMovieListBinding
+  private val movieViewModel: MovieListViewModel by viewModels()
+  private var query: String = ""
+  private lateinit var movieListAdapter: MoviesAdapter
+  private lateinit var listApiManager: ListApiManager
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_movie_list, container, false)
 //        movieViewModel =
 //            ViewModelProvider(this, GlobalViewModelFactory()).get(MovieListViewModel::class.java)
-        listApiManager = ListApiManager()
-        return binding.root
-    }
+    listApiManager = ListApiManager()
+    return binding.root
+  }
 
-    private fun loadAPIData() {
-        listApiManager.popularMovies(PopularMovies(movieViewModel))
+  private fun loadAPIData() {
+    listApiManager.popularMovies(PopularMovies(movieViewModel))
 //        listApiManager.nowPlayingMovies(NowPlayingMovies(movieViewModel))
 //        listApiManager.upCommingMovies(UpComingMovies(movieViewModel))
 
+  }
+
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+
+    setAdapter()
+    setSearchBar()
+    createObserver()
+    loadAPIData()
+  }
+
+  private fun setAdapter() {
+    movieListAdapter = MoviesAdapter(this)
+    binding.rvMovieList.apply {
+      adapter = movieListAdapter
+      layoutManager = LinearLayoutManager(context)
+      addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
     }
+  }
 
 
+  private fun setSearchBar() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    binding.searchLayoutId.searchBar.apply {
+      doAfterTextChanged {
+        query = it.toString()
+        movieListAdapter.getFilterList(query)
+      }
 
-        setAdapter()
-        setSearchBar()
-        createObserver()
-        loadAPIData()
-    }
-
-    private fun setAdapter() {
-        movieListAdapter = MoviesAdapter(this)
-        binding.rvMovieList.apply {
-            adapter = movieListAdapter
-            layoutManager = LinearLayoutManager(context)
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+      setOnEditorActionListener { _, actionId, _ ->
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+          loadAPIData()
+          return@setOnEditorActionListener true
         }
+        false
+      }
     }
+    binding.searchLayoutId.searchBar.text.clear()
+  }
 
-
-    private fun setSearchBar() {
-
-        binding.searchLayoutId.searchBar.apply {
-            doAfterTextChanged {
-                query = it.toString()
-                movieListAdapter.getFilterList(query)
-            }
-
-            setOnEditorActionListener { _, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    loadAPIData()
-                    return@setOnEditorActionListener true
-                }
-                false
-            }
-        }
-        binding.searchLayoutId.searchBar.text.clear()
-    }
-
-    private fun createObserver() {
-        movieViewModel.mutableMovieList.observe(viewLifecycleOwner, {
-            movieListAdapter.apply {
-                artistListData = it as ArrayList<BaseListResponse?>
-                filterArtistListData = artistListData
-                notifyDataSetChanged()
-            }
-        })
+  private fun createObserver() {
+    movieViewModel.mutableMovieList.observe(viewLifecycleOwner, {
+      movieListAdapter.apply {
+        artistListData = it as ArrayList<BaseListResponse?>
+        filterArtistListData = artistListData
+        notifyDataSetChanged()
+      }
+    })
 
 //        movieViewModel.errorMessage.observe(viewLifecycleOwner, {
 //            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
@@ -144,15 +142,15 @@ class MovieListFragment : Fragment(), LifecycleOwner, RecyclerViewClickListener
 //                }
 //            })
 //        }
-    }
+  }
 
-    override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
+  override fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?) {
 
-        findNavController().navigate(
-            MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
-                movie!!
-            )
-        )
-    }
+    findNavController().navigate(
+      MovieListFragmentDirections.actionMovieListFragmentToMovieDetailFragment(
+        movie!!
+      )
+    )
+  }
 
 }

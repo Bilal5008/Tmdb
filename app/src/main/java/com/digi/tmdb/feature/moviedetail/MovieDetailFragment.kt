@@ -22,25 +22,25 @@ class MovieDetailFragment : Fragment() {
 
 //    private val args: MovieDetailArgs by navArgs()
 
-    private  val movieDetailViewModel: MovieDetailViewModel by viewModels()
-    private lateinit var binding: FragmentMovieDetailBinding
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
+  private val movieDetailViewModel: MovieDetailViewModel by viewModels()
+  private lateinit var binding: FragmentMovieDetailBinding
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    // Inflate the layout for this fragment
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
+    binding =
+      DataBindingUtil.inflate(inflater, R.layout.fragment_movie_detail, container, false)
 
-        return binding.root
+    return binding.root
 
 
-    }
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 //        requireActivity().onBackPressedDispatcher
 //            .addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
 //                override fun handleOnBackPressed() {
@@ -50,56 +50,56 @@ class MovieDetailFragment : Fragment() {
 //            })
 
 
-        val message = arguments?.getParcelable<BaseListResponse>("movie")?.id
-        createObserver()
-        message?.let { loadAPIData(it) }
+    val message = arguments?.getParcelable<BaseListResponse>("movie")?.id
+    createObserver()
+    message?.let { loadAPIData(it) }
 
-    }
+  }
 
-    private fun addBackPress() {
+  private fun addBackPress() {
 //        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner)
 //        {
 //            findNavController().navigate(
 //                MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieListFragment()
 //            )
 //        }
-    }
+  }
 
 
-    private fun loadAPIData(query: Int) {
+  private fun loadAPIData(query: Int) {
 
-        movieDetailViewModel.prepareMovieDetailRepo(query)
-    }
+    movieDetailViewModel.prepareMovieDetailRepo(query)
+  }
 
-    private fun createObserver() {
-        movieDetailViewModel.apply {
-            binding.movieDetailViewModel = this
-            movieDetailViewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
-                it.run {
-                    binding.apply {
+  private fun createObserver() {
+    movieDetailViewModel.apply {
+      binding.movieDetailViewModel = this
+      movieDetailViewModel.movieDetailLiveData.observe(viewLifecycleOwner, Observer {
+        it.run {
+          binding.apply {
 
-                        loadImage(posterImage, it.poster_path)
-                        loadImage(backdropImage, it.backdrop_path)
-                        tvMovieDuration.text = "${it.runtime} mins"
-                        tvOverview.text = "Overview : ${it.overview}"
-                        tvName.text = it.original_title
-                        tvAverageVote.text = it.vote_average.toString()
-                        tvTotalVote.text = it.vote_count.toString()
-                        tvRevenue.text = doubleToStringNoDecimal( it.revenue)
-                    }
-                }
-
-
-            })
+            loadImage(posterImage, it.poster_path)
+            loadImage(backdropImage, it.backdrop_path)
+            tvMovieDuration.text = "${it.runtime} mins"
+            tvOverview.text = "Overview : ${it.overview}"
+            tvName.text = it.original_title
+            tvAverageVote.text = it.vote_average.toString()
+            tvTotalVote.text = it.vote_count.toString()
+            tvRevenue.text = doubleToStringNoDecimal(it.revenue)
+          }
         }
-    }
 
-    fun loadImage(view: ImageView, url: String) {
-        Picasso.get().load("http://image.tmdb.org/t/p/w500$url").centerCrop().resize(100, 199)
-            .placeholder(R.drawable.user_placeholder)
-            .error(R.drawable.user_placeholder_error)
 
-            .into(view);
+      })
     }
+  }
+
+  fun loadImage(view: ImageView, url: String) {
+    Picasso.get().load("http://image.tmdb.org/t/p/w500$url").centerCrop().resize(100, 199)
+      .placeholder(R.drawable.user_placeholder)
+      .error(R.drawable.user_placeholder_error)
+
+      .into(view);
+  }
 
 }

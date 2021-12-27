@@ -14,13 +14,13 @@ import retrofit2.HttpException
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
-    private val apiHelper: ApiHelper
+  private val apiHelper: ApiHelper
 ) {
-    var TAG = "MovieRepository"
-    suspend fun getMovieListObserverRx(query: String) =
-        apiHelper.getMovies(query, AppConstants.API_TOKEN)
+  var TAG = "MovieRepository"
+  suspend fun getMovieListObserverRx(query: String) =
+    apiHelper.getMovies(query, AppConstants.API_TOKEN)
 
-    suspend fun getMovieDetailObserverRx(query: Int) =
-        apiHelper.getMoviesDetails(query, AppConstants.API_TOKEN)
+  suspend fun getMovieDetailObserverRx(query: Int) =
+    apiHelper.getMoviesDetails(query, AppConstants.API_TOKEN)
 
 }

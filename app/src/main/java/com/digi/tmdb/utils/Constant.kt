@@ -8,5 +8,4 @@ import com.bumptech.glide.Glide
 class Constant {
 
 
-
 }

@@ -10,18 +10,17 @@ import retrofit2.http.Query
 
 interface ApiService {
 
-    @GET("movie/{filter}")
-    suspend fun getMovies(
-        @Path("filter") filter: String,
-        @Query("api_key") apiKey: String
-    ): Response<AllListResponse>
+  @GET("movie/{filter}")
+  suspend fun getMovies(
+    @Path("filter") filter: String,
+    @Query("api_key") apiKey: String
+  ): Response<AllListResponse>
 
-    @GET("movie/{movie_id}")
-    suspend  fun getMoviesDetails(
-        @Path("movie_id") filter: Int,
-        @Query("api_key") apiKey: String
-    ): Response<MovieDetailResponse>
-
+  @GET("movie/{movie_id}")
+  suspend fun getMoviesDetails(
+    @Path("movie_id") filter: Int,
+    @Query("api_key") apiKey: String
+  ): Response<MovieDetailResponse>
 
 
 }

@@ -17,15 +17,15 @@ import org.junit.Before
  */
 @RunWith(AndroidJUnit4::class)
 class ApiTesting {
-    @Before
-    fun setUp() {
+  @Before
+  fun setUp() {
 
-    }
+  }
 
 
-    @Test
-    fun devUrlTest() {
-        val result: Boolean = AppConstants.baseURL == "https://api.themoviedb.org/3/"
-        assertTrue(result)
-    }
+  @Test
+  fun devUrlTest() {
+    val result: Boolean = AppConstants.baseURL == "https://api.themoviedb.org/3/"
+    assertTrue(result)
+  }
 }

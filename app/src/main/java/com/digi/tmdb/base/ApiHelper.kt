@@ -8,14 +8,14 @@ import retrofit2.http.Query
 
 interface ApiHelper {
 
-    suspend fun getMovies(
-        @Path("filter") filter: String,
-        @Query("api_key") apiKey: String
-    ): Response<AllListResponse>
+  suspend fun getMovies(
+    @Path("filter") filter: String,
+    @Query("api_key") apiKey: String
+  ): Response<AllListResponse>
 
 
-    suspend fun getMoviesDetails(
-        @Path("movie_id") filter: Int,
-        @Query("api_key") apiKey: String
-    ): Response<MovieDetailResponse>
+  suspend fun getMoviesDetails(
+    @Path("movie_id") filter: Int,
+    @Query("api_key") apiKey: String
+  ): Response<MovieDetailResponse>
 }

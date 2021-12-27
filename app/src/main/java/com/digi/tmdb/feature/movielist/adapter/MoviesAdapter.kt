@@ -9,50 +9,50 @@ import com.digi.tmdb.databinding.MovieListRecyclerviewItemBinding
 import com.digi.tmdb.feature.movielist.RecyclerViewClickListener
 import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 
-class MoviesAdapter(private val listener: RecyclerViewClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(private val listener: RecyclerViewClickListener) :
+  RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
-    var artistListData = ArrayList<BaseListResponse?>()
-    var filterArtistListData = ArrayList<BaseListResponse?>()
+  var artistListData = ArrayList<BaseListResponse?>()
+  var filterArtistListData = ArrayList<BaseListResponse?>()
 
 
-    override fun getItemCount() = filterArtistListData.size
+  override fun getItemCount() = filterArtistListData.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MoviesViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.movie_list_recyclerview_item,
-                parent,
-                false
-            )
-        )
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    MoviesViewHolder(
+      DataBindingUtil.inflate(
+        LayoutInflater.from(parent.context),
+        R.layout.movie_list_recyclerview_item,
+        parent,
+        false
+      )
+    )
 
-    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
-        holder.recyclerviewMovieBinding.movie = filterArtistListData[position]
-        holder.recyclerviewMovieBinding.root
+  override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+    holder.recyclerviewMovieBinding.movie = filterArtistListData[position]
+    holder.recyclerviewMovieBinding.root.setOnClickListener {
+      listener.onRecyclerViewItemClick(
+        holder.recyclerviewMovieBinding.root, filterArtistListData[position]
+      )
+    }
+  }
 
-            .setOnClickListener {
-                listener.onRecyclerViewItemClick(holder.recyclerviewMovieBinding.root, filterArtistListData[position]
-                )
-            }
+
+  inner class MoviesViewHolder(
+    val recyclerviewMovieBinding: MovieListRecyclerviewItemBinding
+  ) : RecyclerView.ViewHolder(recyclerviewMovieBinding.root)
+
+
+  fun getFilterList(query: String): ArrayList<BaseListResponse?> {
+    if (query.isEmpty()) {
+      filterArtistListData = artistListData
     }
 
-
-    inner class MoviesViewHolder(
-        val recyclerviewMovieBinding: MovieListRecyclerviewItemBinding
-    ) : RecyclerView.ViewHolder(recyclerviewMovieBinding.root)
-
-
-    fun getFilterList(query: String): ArrayList<BaseListResponse?> {
-        if (query.isEmpty()) {
-            filterArtistListData = artistListData
-        }
-
-        filterArtistListData = ArrayList(artistListData.filter {
-            it?.title?.toLowerCase()?.contains(query.toLowerCase()) == true
-        })
-        notifyDataSetChanged()
-        return filterArtistListData
-    }
+    filterArtistListData = ArrayList(artistListData.filter {
+      it?.title?.toLowerCase()?.contains(query.toLowerCase()) == true
+    })
+    notifyDataSetChanged()
+    return filterArtistListData
+  }
 
 }

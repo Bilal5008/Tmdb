@@ -17,23 +17,23 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class ApplicationModule {
 
-    fun provideBaseUrl() = AppConstants.baseURL
+  fun provideBaseUrl() = AppConstants.baseURL
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(provideBaseUrl())
-            .client(OkHttpClient.Builder().build())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+  @Provides
+  @Singleton
+  fun provideRetrofit(): Retrofit =
+    Retrofit.Builder()
+      .baseUrl(provideBaseUrl())
+      .client(OkHttpClient.Builder().build())
+      .addConverterFactory(GsonConverterFactory.create())
+      .build()
 
-    @Provides
-    @Singleton
-    fun provideApiService() = provideRetrofit().create(ApiService::class.java)
+  @Provides
+  @Singleton
+  fun provideApiService() = provideRetrofit().create(ApiService::class.java)
 
-    @Provides
-    @Singleton
-    fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
+  @Provides
+  @Singleton
+  fun provideApiHelper(apiHelper: ApiHelperImpl): ApiHelper = apiHelper
 
 }

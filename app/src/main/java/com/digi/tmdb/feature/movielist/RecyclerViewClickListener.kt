@@ -5,5 +5,5 @@ import com.digi.tmdb.feature.movielist.listResponse.BaseListResponse
 
 
 interface RecyclerViewClickListener {
-    fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?)
+  fun onRecyclerViewItemClick(view: View, movie: BaseListResponse?)
 }
